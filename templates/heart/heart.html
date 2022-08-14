@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Heart Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Health Checkup</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/b_cancer">Breast</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/diabetes">Diabetes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/heart">Heart</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/kidney">Kidney</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/liver">Liver</a>
+              </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div id="intro" class="container-fluid view ">
+        <h1 class="text-center text-capitalize pt-5">Know your chances of getting a heart disease in one Click!</h1>
+        <hr class="w-75 mx-auto pt-5">
+        <div class="row mb-5">
+          <div class="col-lg-6 col-md-6 col-12 my-auto">
+            <img height="500px" src="./static/heart.jpg" class="float-left">
+            <h3>{{ prediction_text }}<h3>
+
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <form action="{{ url_for('predict_heart')}}" method="post">
+              <div class="form-group">
+                <label for="cp">Chest Pain Type</label>
+                <select class="form-control" id="cp" name = "cp" required="required" placeholder="Chest Pain Type">
+                  <option value="1">Typical Angina</option>
+                  <option value="2">Atypical Angina</option>
+                  <option value="3">Non-Anginal Pain</option>
+                  <option value="4">Asymptomatic</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <!-- TODO : Year to accept only year date picker -->
+                <label for="trestbps">Resting Blood Pressure (in mm Hg)</label>
+                <input class="form-control" type="number" id="trestbps" name="trestbps" required="required" placeholder="Resting Blood Pressure">
+              </div>
+
+              <div class="form-group">
+                <label for="chol">Serum Cholestoral in mg/dl</label>
+                <input class="form-control" type="number" step="any" id="chol" name="chol" required="required" placeholder="Serum Cholestoral">
+              </div>
+
+              <div class="form-group">
+                <label for="fbs">Fasting Blood Sugar</label>
+                <select class="form-control" id="fbs" name = "fbs" required="required" placeholder="Fasting Blood Sugar">
+                  <option value="0">Fasting Blood Sugar < 120 mg/dl</option>
+                  <option value="1">Fasting Blood Sugar > 120 mg/dl</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="restecg">Resting Electro-cardiographic Result</label>
+                <select class="form-control" type="number" id="restecg" name="restecg" required="required" placeholder="Resting Electro-cardiographic Result">
+                <option value="0">Normal</option>
+                <option value="1">having ST-T wave abnormality</option>
+                <option value="2">showing probable or definite left ventricular hypertrophy</option>
+            	</select>
+              </div>
+              
+              <div class="form-group">
+                <label for="thalach">Maximum Heart Rate Achieved</label>
+                <input class="form-control" id="thalach" name = "thalach" required="required" >
+              </div>
+
+              <div class="form-group">
+                <label for="exang">Exercise Induced Angina</label>
+                <select class="form-control" id="exang" name = "exang" required="required" >
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-danger">Predict</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- <form action="{{ url_for('predict_heart')}}"method="post">
+        <input type="text" name="age" placeholder="Age" required="required" /><br>
+        <input type="text" name="sex" placeholder="sex" required="required" /><br>
+          <input type="text" name="cp" placeholder="cp" required="required" /><br>
+          <input type="text" name="trestbps" placeholder="trestbps" required="required" /><br>
+          <input type="text" name="chol" placeholder="chol" required="required" /><br>
+          <input type="text" name="fbs" placeholder="fbs" required="required" /><br>
+          <input type="text" name="restecg" placeholder="restecg" required="required" /><br>
+          <input type="text" name="thalach" placeholder="thalach" required="required" /><br>
+          <input type="text" name="exang" placeholder="exang" required="required" /><br>
+          <input type="text" name="oldpeak" placeholder="oldpeak" required="required" /><br>
+          <input type="text" name="slopr" placeholder="slopr" required="required" /><br>
+          <input type="text" name="ca" placeholder="ca" required="required" /><br>
+          <input type="text" name="thal" placeholder="thal" required="required" /><br>
+    
+          <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+      </form>
+
+      {{prediction_text}} -->
+    <!-- script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

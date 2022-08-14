@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Breast Cancer Pridiction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Health Checkup</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/b_cancer">Breast</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/diabetes">Diabetes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/heart">Heart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/kidney">Kidney</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/liver">Liver</a>
+            </li>
+          </ul>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="intro" class="container-fluid view ">
+      <h1 class="text-center text-capitalize pt-5">Know your chances of getting Breast Cancer in one Click!</h1>
+      <hr class="w-75 mx-auto pt-5">
+      <div class="row mb-5">
+        <div class="col-lg-6 col-md-6 col-12 my-auto">
+          <img height="600px" src="./static/breast.jpg" class="float-left">
+          <h3>{{ prediction_text }}<h3>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+
+          <form action="{{ url_for('predict_cancer')}}" method="POST">
+            <div class="form-group">
+              <!-- TODO : Year to accept only year date picker -->
+              <br><br><br>
+              <label for="concave points_mean">Mean of the Concave Points</label>
+              <input class="form-control" type="number" id="concave points_mean" name="concave points_mean"
+                required="required" placeholder="Mean of the Concave Points">
+            </div>
+            <div class="form-group">
+              <label for="area_mean">Mean of the Area</label>
+              <input class="form-control" type="number" step="any" id="area_mean" name="area_mean" required="required"
+                placeholder="Mean of the Area">
+            </div>
+            <div class="form-group">
+              <label for="radius_mean">Mean of the Radius</label>
+              <input class="form-control" type="number" id="radius_mean" name="radius_mean" required="required"
+                placeholder="Mean of the radius">
+            </div>
+            <div class="form-group">
+              <label for="perimeter_mean">Mean of the Perimeters</label>
+              <input class="form-control" type="number" id="perimeter_mean" name="perimeter_mean" required="required"
+                placeholder="Mean of the Parameter">
+            </div>
+            <div class="form-group">
+              <label for="concavity_mean">Mean of the Concavity</label>
+              <input class="form-control" type="number" id="concavity_mean" name="concavity_mean" required="required"
+                placeholder="Mean of the concavity">
+            </div>
+            <button type="submit" class="btn btn-danger">Predict</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
